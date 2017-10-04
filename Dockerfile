@@ -34,10 +34,7 @@ RUN apt-get install -y \
 
 # QT4 components
 RUN apt-get install -y \
-  qt4-qmake \
-  qt4-dev-tools \
-  libqt4-dev \
-  libqt4-opengl-dev
+  qtbase5-dev
 
 # Python components
 RUN apt-get install -y \
@@ -53,7 +50,7 @@ RUN apt-get install -y \
 
 # Create working directory
 RUN mkdir -p /usr/ns3
-WORKDIR /usr/ns3
+WORKDIR /usr
 
 # Fetch NS-3 source
 RUN wget http://www.nsnam.org/release/ns-allinone-3.26.tar.bz2
@@ -62,9 +59,11 @@ RUN tar -xf ns-allinone-3.26.tar.bz2
 # Configure and compile NS-3
 RUN cd ns-allinone-3.26 && ./build.py --enable-examples --enable-tests
 
+RUN ln -s /usr/ns-allinone-3.26/ns-3.26/ /usr/ns3/
+
 # Cleanup
 RUN apt-get clean && \
   rm -rf /var/lib/apt && \
-  rm /usr/ns3/ns-allinone-3.26.tar.bz2
+  rm /usr/ns-allinone-3.26.tar.bz2
 
 
