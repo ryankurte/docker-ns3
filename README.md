@@ -1,8 +1,6 @@
 # docker-ns3
 
-A Docker container for NS-3
-
-A Docker container for Omnet++
+A Docker container for the NS-3 Network Simulator
 
 ## Usage
 
